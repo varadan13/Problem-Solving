@@ -5,8 +5,10 @@ isPresent x (y:ys)
                 | x==y = True
                 | otherwise = isPresent x ys
 
+
 union' :: [Int] -> [Int] -> [Int]
-union' xs [] = xs 
+
+union' xs [] = xs
 union' xs (y:ys)
-            | isPresent y xs = union' xs y
-            | otherwise = union' 
+                | isPresent y xs = union' xs ys
+                | otherwise      = y : (union' xs ys)
