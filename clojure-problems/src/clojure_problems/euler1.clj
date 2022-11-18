@@ -20,3 +20,8 @@
   (def threes (filter #(= (mod % 3) 0) thousand))
   (def fives (filter #(= (mod % 5) 0) thousand))
   (sum (union threes fives)))
+
+;; (defn has? ([[] _] false)
+;;   ([arr a] (if (= (first arr) a)
+;;              true
+;;              (has? (rest arr) a))))
