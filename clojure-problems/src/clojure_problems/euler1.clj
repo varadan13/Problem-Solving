@@ -1,6 +1,3 @@
-(ns clojure-problems.core
-  (:gen-class))
-
 (defn natural-numbers
   ([] (natural-numbers 1))
   ([n] (cons n (lazy-seq (natural-numbers (+ n 1))))))
@@ -23,8 +20,3 @@
   (def threes (filter #(= (mod % 3) 0) thousand))
   (def fives (filter #(= (mod % 5) 0) thousand))
   (sum (union threes fives)))
-
-(defn -main
-  "I don't do a whole lot ... yet."
-  []
-  (println (solution)))
