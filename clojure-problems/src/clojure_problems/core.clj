@@ -33,13 +33,20 @@
     (ureduce g [] arr)))
 
 (defn sum-integers [a b]
-  (loop [point a]
-    (if (> point b) point
-        (recur (+ point 1)))))
+  (loop [point a value 0]
+    (if (> point b) value
+        (recur (+ point 1) (+ value point)))))
+
+(defn sum-cubes [a b]
+  (let [cube #(* % % %)]
+    (loop [point a value 0]
+      (if (> point b) value
+          (recur (+ 1 point) (+ value (cube point)))))))
 
 (defn -main
   "I don't do a whole lot ... yet."
   []
   (println (map-using-reduce #(+ % 20) [1 2 3 4 5 6]))
   (println (ureduce + 0 [1 2 3]))
-  (println (sum-integers 1 10)))
+  (println (sum-integers 1 10))
+  (println (sum-cubes 1 5)))
