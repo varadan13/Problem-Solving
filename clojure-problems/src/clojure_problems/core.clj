@@ -32,8 +32,14 @@
   (let [g #(into %1 (vector (f %2)))]
     (ureduce g [] arr)))
 
+(defn sum-integers [a b]
+  (loop [point a]
+    (if (> point b) point
+        (recur (+ point 1)))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   []
   (println (map-using-reduce #(+ % 20) [1 2 3 4 5 6]))
-  (println (ureduce + 0 [1 2 3])))
+  (println (ureduce + 0 [1 2 3]))
+  (println (sum-integers 1 10)))
