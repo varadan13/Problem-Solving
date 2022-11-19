@@ -1,0 +1,3 @@
+>> clojure tasks
+
+build reduce using loop rest and first
