@@ -1,21 +1,24 @@
-(defn natural-numbers
-  ([] (natural-numbers 1))
-  ([n] (cons n (lazy-seq (natural-numbers (+ n 1))))))
+;; hobbit data structure
+;; hobbit data structure is asymmetric so a function to symmetrise this data structure
+;; function that iterates over this data structure to randomly pick a body part
 
-(defn has [arr a] (if (first arr) false (if (= (first arr) a) true (has (rest arr) a))))
 
-(defn diff [arr1 arr2] (filter #(not (has arr2 %)) arr1))
+(def asym-hobbit-body-parts
+  [{:name "left-eye" :size 1}
+   {:name "left-shoulder" :size 3}
+   {:name "left-forearm" :size 2}])
 
-(defn intersection [arr1 arr2] (filter #(has arr2 %) arr1))
+(defn matching-part [part]
+  {:name (clojure.string/replace (:name part) #"^left-" "right-")
+   :size (:size part)})
 
-(defn union [arr1 arr2]
-  (def diff1 (diff arr1 arr2))
-  (def diff2 (diff arr2 arr1))
-  (def inter (intersection arr1 arr2))
-  (into diff1 (into diff2 inter)))
+;; reduce 
 
-(defn solution []
-  (def thousand (take 10 (natural-numbers)))
-  (def threes (filter #(= (/ % 3) 0) thousand))
-  (def fives (filter #(= (/ % 5) 0) thousand))
-  (union threes fives))
+;; does it obey the pattern that allows me to use reduce?
+
+;; (reduce + 2 [1 2 3])
+
+(defn symmetrize-body-parts
+  [asym-body-parts]
+  (let [f #((into %1 (set (%2 (matching-part %2)))))]
+    (reduce f [] asym-body-parts)))
