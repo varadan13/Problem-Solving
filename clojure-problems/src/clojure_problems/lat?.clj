@@ -2,5 +2,5 @@
   (loop [array l]
     (cond
       (nil? (first array)) true
-      (seq? (first array)) false
+      (vector? (first array)) false
       :else (recur (rest array)))))
