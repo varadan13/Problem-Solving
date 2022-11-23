@@ -58,10 +58,22 @@
       (= (first lat) a) true
       :else (recur (rest lat)))))
 
+(defn rember [a lat]
+  (loop [latArray lat res []]
+    (cond
+      (nil? (first latArray)) res
+      (= (first latArray) a) (recur (rest latArray) res)
+      :else (recur (rest latArray) (into res [(first latArray)])))))
+
+(defn firsts [l]
+  (cond
+    (nil? (first l)) []
+    :else (into [(first (first l))] (firsts (rest l)))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   []
-  (println (member? 3 [3 4])))
+  (println (firsts [[1 2] [3 4] [5 6]])))
   ;; (println (ureduce + 0 [1 2 3]))
   ;; (println (sum-integers 1 10))
   ;; (println (sum-cubes 1 5)))
